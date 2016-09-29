@@ -8,7 +8,7 @@ else {
 
   $name = htmlspecialchars($_POST['name']);
   $firstname = htmlspecialchars($_POST['firstname']);
-  $age = htmlspecialchars($_POST['age']);
+  $age = (int)$_POST['age'];
   $sexe = htmlspecialchars($_POST['gender']);
   $ville = htmlspecialchars($_POST['city']);
   $hobbies = htmlspecialchars($_POST['hobbies']);

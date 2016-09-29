@@ -1,8 +1,30 @@
 <?php
 
+$_GET['type'] = htmlspecialchars($_GET['type']);
+
   if( isset($_GET['type']) && $_GET['type'] == 'error') {
+    $_GET['code'] = (int) $_GET['code'];
     if ($_GET['code'] == 1) {
       $error_message = "Tous les champs doivents être remplis ou cochés ;-)";
+    }
+    elseif ($_GET['code'] == 2) {
+      $error_message = "Votre fichier est trop lourd (max 1mo)";
+    }
+    elseif ($_GET['code'] == 3) {
+      $error_message = "Votre fichier n'est pas au bon format (jpeg, jpg, gif, png, pdf, doc)";
+    }
+    else {
+      $error_message = "Une erreur s'est produite merci de réessyer ultérieurement";
+    }
+  }
+
+  if( isset($_GET['type']) && $_GET['type'] == 'success') {
+    $_GET['code'] = (int) $_GET['code'];
+    if ($_GET['code'] == 1) {
+      $success_message = "Vos données ont bien été envoyées, aucun fichier n'a été transmis";
+    }
+    else {
+      $success_message = "Vos données et le fichier joint on bien été envoyés";
     }
   }
 
@@ -17,6 +39,10 @@
 
   if(!empty($error_message)) {
     echo "<p>" . $error_message . "</p>";
+  }
+
+  if(!empty($success_message)) {
+    echo "<p>" . $success_message . "</p>";
   }
 
  ?>

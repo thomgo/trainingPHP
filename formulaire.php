@@ -1,8 +1,8 @@
 <?php
 
-  if($_GET['type'] == 'error') {
+  if( isset($_GET['type']) && $_GET['type'] == 'error') {
     if ($_GET['code'] == 1) {
-      $error_message = "Tous les champs doivents être remplis";
+      $error_message = "Tous les champs doivents être remplis ou cochés ;-)";
     }
   }
 

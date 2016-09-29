@@ -55,13 +55,11 @@
       </p>
     </label>
 
-    <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
-
     <label> Ajouter un fichier :
       <p><input type="file" name="file"></p>
     </label>
 
-    <p><input type="submit" name="name" value="Envoyer"></p>
+    <p><input type="submit" name="send" value="Envoyer"></p>
 
   </form>
 

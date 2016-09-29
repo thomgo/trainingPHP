@@ -1,8 +1,6 @@
 <?php
 
-$_GET['type'] = htmlspecialchars($_GET['type']);
-
-  if( isset($_GET['type']) && $_GET['type'] == 'error') {
+  if( isset($_GET['type']) && htmlspecialchars($_GET['type'] == 'error')) {
     $_GET['code'] = (int) $_GET['code'];
     if ($_GET['code'] == 1) {
       $error_message = "Tous les champs doivents être remplis ou cochés ;-)";
@@ -18,7 +16,7 @@ $_GET['type'] = htmlspecialchars($_GET['type']);
     }
   }
 
-  if( isset($_GET['type']) && $_GET['type'] == 'success') {
+  if( isset($_GET['type']) && htmlspecialchars($_GET['type'] == 'success')) {
     $_GET['code'] = (int) $_GET['code'];
     if ($_GET['code'] == 1) {
       $success_message = "Vos données ont bien été envoyées, aucun fichier n'a été transmis";

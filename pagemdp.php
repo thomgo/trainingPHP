@@ -8,6 +8,7 @@
 
 <?php
 
+// When no password display the form
 if (!isset($_POST['password'])) {
 
 echo '<form action="pagemdp.php" method="POST">
@@ -18,10 +19,12 @@ echo '<form action="pagemdp.php" method="POST">
 </form>';
 }
 
+// If wrong password message
 elseif ($_POST['password'] != "Simplon") {
   echo "Vous avez rentré le mauvais mot de passe";
 }
 
+// If good password show the codes
 else {
 
 echo '<p>Vous accédez à un espace strictement réservé au personnel, les codes suivants sont

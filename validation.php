@@ -29,12 +29,12 @@ else {
            }
            else {
            header('Location: formulaire.php?type=error&code=3');
+           }
       }
-  }
       else {
         header('Location: formulaire.php?type=error&code=2');
       }
-}
+    }
 }
 
 

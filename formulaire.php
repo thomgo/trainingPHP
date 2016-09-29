@@ -1,7 +1,17 @@
+<!--
+
+~~~~General checking for url's information and definition
+of the message to display~~~~~~~
+
+ -->
+
 <?php
 
+// check for the error code and set the message
   if( isset($_GET['type']) && htmlspecialchars($_GET['type'] == 'error')) {
+    // Make sure the code is an integer
     $_GET['code'] = (int) $_GET['code'];
+
     if ($_GET['code'] == 1) {
       $error_message = "Tous les champs doivents être remplis ou cochés ;-)";
     }
@@ -16,8 +26,11 @@
     }
   }
 
+// check for the success code and set the message
   if( isset($_GET['type']) && htmlspecialchars($_GET['type'] == 'success')) {
+    // Make sure the code is an integer
     $_GET['code'] = (int) $_GET['code'];
+
     if ($_GET['code'] == 1) {
       $success_message = "Vos données ont bien été envoyées, aucun fichier n'a été transmis";
     }
@@ -35,10 +48,12 @@
 
 <?php
 
+// check is the error messgae is set
   if(!empty($error_message)) {
     echo "<p>" . $error_message . "</p>";
   }
 
+// check is the success messgae is set
   if(!empty($success_message)) {
     echo "<p>" . $success_message . "</p>";
   }

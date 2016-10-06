@@ -5,6 +5,22 @@
         <title>Minichat</title>
     </head>
 
+
+<!-- Check if the treatment page returned an error code -->
+<?php
+if (!empty($_GET['code'])) {
+
+  if ($_GET['code'] == 1) {
+  echo '<p>Ce code est déja utilisé, veuillez en saisir un autre</p>';
+  }
+
+  else {
+  echo '<p>Une erreur s\'est produite</p>';
+  }
+
+}
+?>
+
 <!-- Basic html form with messahe and pseudo -->
     <form action="minichat_treatment.php" method="POST">
 
@@ -50,4 +66,4 @@ $selection->closeCursor();
 
  ?>
 
- </html>
+</html>

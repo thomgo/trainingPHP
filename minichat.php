@@ -8,8 +8,15 @@
 <!-- Basic html form with messahe and pseudo -->
     <form action="minichat_treatment.php" method="POST">
 
-    <label>Votre pseudo : <input type="text" name="pseudo"/></label>
-    <label>Votre Message : <input type="text" name="message"/></label>
+    <p>
+      <label>Votre pseudo : <input type="text" name="pseudo"/></label>
+    </p>
+    <p>
+      <label>Votre Message : <input type="text" name="message"/></label>
+    </p>
+    <p>
+      <label>Votre code (vous permettra de supprimer votre message) : <input type="number" name="code"/></label>
+    </p>
 
     <p><input type="submit" value="Envoyer"></p>
 
@@ -26,7 +33,16 @@ $selection = $bdd->query('SELECT message, pseudo FROM minichat ORDER BY ID DESC 
 // Display the messages from the array
 while ($chatdata = $selection->fetch()) {
 
-echo '<p>'. $chatdata['pseudo']. ' - '  . $chatdata['message'] . '</p>';
+  if (!empty($chatdata['pseudo'] && $chatdata['message'] )) {
+
+echo '<p>'. $chatdata['pseudo']. ' - '  . $chatdata['message'] . '</p>' .
+'<p>
+  <form action="minichat_treatment.php" method="POST">
+    <label>Votre code : <input type="number" name="supcode"/></label>
+    <input type="submit" value="Supprimer">
+  </form>
+</p>';
+}
 
 }
 

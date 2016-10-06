@@ -31,13 +31,31 @@
         ?>
     </h3>
 
-    <p>
     <?php
-    echo htmlspecialchars($billet['contenu']);
+    echo '<p>' . htmlspecialchars($billet['contenu']) . '</p>';
+
+    $requete->closeCursor();
+
     ?>
-    </p>
 
 </div>
+
+<h2>Commentaires</h2>
+
+<?php
+
+$requete = $bdd->prepare('SELECT auteur, commentaire, DATE_FORMAT(date_commentaire, \'%Hh%imin le %d/%m/%Y\') AS date_commentaire_fr FROM commentaires WHERE id_billet = ? ORDER BY date_commentaire');
+$requete->execute(array($_GET['billet']));
+
+while ($commentaires = $requete->fetch()) {
+
+echo '<p>' . htmlspecialchars($commentaires['auteur']) . ' à ' . $commentaires['date_commentaire_fr'] . '</p>';
+echo '<p>'. htmlspecialchars($commentaires['commentaire']) . '</p>';
+}
+
+$requete->closeCursor();
+
+?>
 
 </body>
 

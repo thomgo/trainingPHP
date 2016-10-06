@@ -27,6 +27,7 @@ h3
     background-color:#CCCCCC;
 
     margin-top:0px;
+    padding: 0.5em;
 
 }
 
@@ -40,6 +41,11 @@ h3
 
 }
 
+.news .date {
+  background-color: lightblue;
+  font-style: italic;
+  color: white;
+}
 
 a
 

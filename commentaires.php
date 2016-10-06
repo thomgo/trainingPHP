@@ -17,8 +17,27 @@
 
     require ('db.php');
 
+    $requete = $bdd->prepare('SELECT id, titre, contenu, DATE_FORMAT(date_creation, \'%Hh%imin le %d/%m/%Y\') AS datecrea FROM billets WHERE id = ?');
+    $requete->execute(array($_GET['billet']));
+    $billet = $requete->fetch();
 
 ?>
+
+<div class="news">
+
+    <h3>
+        <?php echo htmlspecialchars($billet['titre']);
+        echo '<p class="date"> à' . $billet['datecrea'] . '</p>';
+        ?>
+    </h3>
+
+    <p>
+    <?php
+    echo htmlspecialchars($billet['contenu']);
+    ?>
+    </p>
+
+</div>
 
 </body>
 

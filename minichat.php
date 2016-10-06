@@ -18,6 +18,16 @@
 
 require ('bd.php');
 
+$selection = $bdd->query('SELECT message, pseudo FROM minichat ORDER BY ID DESC LIMIT 10');
+
+while ($chatdata = $selection->fetch()) {
+
+echo '<p>'. $chatdata['pseudo']. ' - '  . $chatdata['message'] . '</p>';
+
+}
+
+$selection->closeCursor();
+
  ?>
 
  </html>

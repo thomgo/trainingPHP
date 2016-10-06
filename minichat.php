@@ -16,6 +16,8 @@
 
 <?php
 
+require ('bd.php');
+
  ?>
 
  </html>

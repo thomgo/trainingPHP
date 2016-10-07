@@ -15,22 +15,27 @@
 
 <?php
 
+// Connexion to the database
     require ('db.php');
 
+// Get the concerned article with a GET methode
     $requete = $bdd->prepare('SELECT id, titre, contenu, DATE_FORMAT(date_creation, \'%Hh%imin le %d/%m/%Y\') AS datecrea FROM billets WHERE id = ?');
-    $requete->execute(array($_GET['billet']));
+    $requete->execute(array(htmlspecialchars($_GET['billet'])));
     $billet = $requete->fetch();
 
 ?>
 
+<!-- Display of the article -->
 <div class="news">
 
+<!-- Title and date -->
     <h3>
         <?php echo htmlspecialchars($billet['titre']);
         echo '<p class="date"> à' . $billet['datecrea'] . '</p>';
         ?>
     </h3>
 
+<!-- Content and closing of the request -->
     <?php
     echo '<p>' . htmlspecialchars($billet['contenu']) . '</p>';
 
@@ -40,19 +45,24 @@
 
 </div>
 
+
+<!-- Comments -->
 <h2>Commentaires</h2>
 
 <?php
 
-$requete = $bdd->prepare('SELECT auteur, commentaire, DATE_FORMAT(date_commentaire, \'%Hh%imin le %d/%m/%Y\') AS date_commentaire_fr FROM commentaires WHERE id_billet = ? ORDER BY date_commentaire');
-$requete->execute(array($_GET['billet']));
+// Prepare a request to get the comments with a GET methode
+$requete = $bdd->prepare('SELECT auteur, commentaire, DATE_FORMAT(date_commentaire, \'%Hh%imin le %d/%m/%Y\') AS datecom FROM commentaires WHERE id_billet = ? ORDER BY date_commentaire');
+$requete->execute(array(htmlspecialchars($_GET['billet'])));
 
+// Get an array of data and display the content of each comment
 while ($commentaires = $requete->fetch()) {
 
-echo '<p>' . htmlspecialchars($commentaires['auteur']) . ' à ' . $commentaires['date_commentaire_fr'] . '</p>';
+echo '<p>' . htmlspecialchars($commentaires['auteur']) . ' à ' . $commentaires['datecom'] . '</p>';
 echo '<p>'. htmlspecialchars($commentaires['commentaire']) . '</p>';
 }
 
+// Close the request
 $requete->closeCursor();
 
 ?>

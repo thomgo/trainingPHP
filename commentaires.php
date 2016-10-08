@@ -52,7 +52,7 @@
 <?php
 
 // Prepare a request to get the comments with a GET methode
-$requete = $bdd->prepare('SELECT auteur, commentaire, DATE_FORMAT(date_commentaire, \'%Hh%imin le %d/%m/%Y\') AS datecom FROM commentaires WHERE id_billet = ? ORDER BY date_commentaire');
+$requete = $bdd->prepare('SELECT auteur, commentaire, DATE_FORMAT(date_commentaire, \'%Hh%imin le %d/%m/%Y\') AS datecom FROM commentaires WHERE id_billet = ? ORDER BY date_commentaire DESC');
 $requete->execute(array(htmlspecialchars($_GET['billet'])));
 
 // Get an array of data and display the content of each comment
@@ -66,6 +66,37 @@ echo '<p>'. htmlspecialchars($commentaires['commentaire']) . '</p>';
 $requete->closeCursor();
 
 ?>
+
+<!-- Form to post a comment -->
+<form action="" method="post">
+  <p>
+    <label for="auteur"> Nom : </label>
+    <input type="text" name="auteur" placeholder="votre nom">
+  </p>
+  <textarea name="commentaire" rows="8" cols="40" placeholder="votre commentaire"></textarea>
+  <p>
+    <input type="submit" value="Poster">
+  </p>
+</form>
+
+<?php
+
+// If there is information in the form they are added to the database
+if (isset($_POST['auteur']) && isset($_POST['commentaire'])) {
+
+// Treat the informations as variables and protect them
+  $auteur = htmlspecialchars($_POST['auteur']);
+  $commentaire = htmlspecialchars($_POST['commentaire']);
+  $idBillet = htmlspecialchars($_GET['billet']);
+
+  $requete = $bdd->prepare('INSERT INTO commentaires (auteur, commentaire, id_billet, date_commentaire) VALUES(?, ?, ?, NOW())');
+  $requete->execute([$auteur, $commentaire, $idBillet]);
+
+// Refresh the page to display the new comment right away
+  header("Refresh:0");
+}
+
+ ?>
 
 </body>
 

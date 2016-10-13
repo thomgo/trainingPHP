@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <html>
 
     <head>
@@ -8,7 +12,9 @@
 
     <body>
 
-
+      <?php
+        echo "Bonjour " . $_SESSION['pseudo'] . " bienvenue sur votre espace personnel";
+       ?>
 
     </body>
 

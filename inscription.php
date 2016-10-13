@@ -9,6 +9,11 @@
     <body>
 
        <h1>Inscrivez-vous dans notre espace membres</h1>
+       <?php
+          if ($_GET['code'] == 1) {
+            echo "Tous les champs sont obligatoires";
+          }
+        ?>
 
        <form action="enregistrement.php" method="post">
 

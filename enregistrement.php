@@ -7,7 +7,7 @@ $mdpconfirm = sha1(htmlspecialchars($_POST['mdpconfirm']));
 $mail = htmlspecialchars($_POST['mail']);
 
 // Check if there is no empty field
-if (empty($pseudo) && empty($mdp) && empty($mdpconfirm) && empty($mail)) {
+if (empty($pseudo) || empty($mdp) || empty($mdpconfirm) || empty($mail)) {
   header("Location: inscription.php?code=1");
   exit;
 }

@@ -1,4 +1,18 @@
-<?php
+<html>
 
+    <head>
+        <meta charset="utf-8" />
+        <title>Un espace membres</title>
+        <link href="style.css" rel="stylesheet" />
+    </head>
 
- ?>
+    <body>
+
+      <?php
+      // Connexion to the database
+                require ('db.php');
+       ?>
+
+    </body>
+
+  </html>

@@ -16,11 +16,17 @@
 $user = $request->fetch();
 
 if ($user) {
+  session_start();
+  $_SESSION['pseudo'] = $pseudo;
+
   header("Location: espacemembre.php");
+  exit;
 }
 else {
   echo "Ce compte n'existe pas, vérifiez votre pseudonyme et votre mot de passe";
 }
+
+$request->closeCursor();
 
 }
  ?>

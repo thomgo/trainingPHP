@@ -46,5 +46,6 @@ else {
   exit;
 }
 
-
+$data->closeCursor();
+$request->closeCursor();
  ?>

@@ -10,9 +10,19 @@
 
        <h1>Inscrivez-vous dans notre espace membres</h1>
        <?php
+       if (!empty($_GET['code'])) {
+
           if ($_GET['code'] == 1) {
             echo "Tous les champs sont obligatoires";
           }
+          elseif ($_GET['code'] == 2) {
+            echo "Attention vos mots de passe ne sont pas identiques !";
+          }
+          elseif ($_GET['code'] == 3) {
+            echo "Cette adresse mail est invalide";
+          }
+
+        }
         ?>
 
        <form action="enregistrement.php" method="post">

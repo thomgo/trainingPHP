@@ -21,7 +21,12 @@
           elseif ($_GET['code'] == 3) {
             echo "Cette adresse mail est invalide";
           }
-
+          elseif ($_GET['code'] == 4) {
+            echo "Ce pseudo est déjà utilisé, veuillez en choisir un autre !";
+          }
+          else {
+            echo "Une erreur est survenue, veuillez réessayer";
+          }
         }
         ?>
 

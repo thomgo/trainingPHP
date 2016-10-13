@@ -9,6 +9,8 @@
     <body>
 
        <h1>Inscrivez-vous dans notre espace membres</h1>
+
+       <!-- Check if there is an error code in the url and display the right message -->
        <?php
        if (!empty($_GET['code'])) {
 
@@ -30,6 +32,7 @@
         }
         ?>
 
+<!-- Html form -->
        <form action="enregistrement.php" method="post">
 
            <label>Votre pseudo
@@ -56,6 +59,7 @@
          <input type="submit" name="name" value="M'inscrire">
        </form>
 
+<!-- Link to get to the connexion page -->
        <div>
          <a href="connexion.php">Déja inscrit ? Me connecter avec mon compte</a>
        </div>

@@ -1,3 +1,30 @@
+<?php
+
+// Connexion to the database
+  require ('db.php');
+  if (isset($_POST['pseudo']) && isset($_POST['mdp'])) {
+
+  $pseudo = htmlspecialchars($_POST['pseudo']);
+  $mdp = sha1(htmlspecialchars($_POST['mdp']));
+
+  $request = $bdd->prepare('SELECT * FROM membres WHERE pseudo= :pseudo AND mdp= :mdp');
+  $request->execute([
+    'pseudo'=>$pseudo,
+    'mdp'=>$mdp
+  ]);
+
+$user = $request->fetch();
+
+if ($user) {
+  header("Location: espacemembre.php");
+}
+else {
+  echo "Ce compte n'existe pas, vérifiez votre pseudonyme et votre mot de passe";
+}
+
+}
+ ?>
+
 <html>
 
     <head>
@@ -9,18 +36,18 @@
     <body>
 
       <?php
-      // Connexion to the database
-                require ('db.php');
-
-                if (!empty($_GET['code'])) {
-                  if ($_GET['code'] == 1) {
-                    echo "<p>Il est l'heure de vous connecter pour la première fois</p>";
-                  }
-                }
+          if (!empty($_GET['code'])) {
+            if ($_GET['code'] == 1) {
+              echo "<p>Il est l'heure de vous connecter pour la première fois</p>";
+            }
+            else {
+              echo "Connectez-vous";
+            }
+          }
        ?>
 
        <!-- Html form -->
-              <form action="enregistrement.php" method="post">
+              <form action="" method="post">
 
                   <label>Votre pseudo
                     <p>

@@ -5,6 +5,12 @@
     header("Location: espacemembre.php");
     exit;
   }
+
+  if (isset($_COOKIE['pseudo']) && isset($_COOKIE['mdp']) && $_GET['code'] != 3) {
+    header("Location: espacemembre.php?code=2");
+    exit;
+  }
+
 // Connexion to the database
   require ('db.php');
 
@@ -25,8 +31,10 @@ if ($user) {
   $_SESSION['pseudo'] = $pseudo;
   $_SESSION['mdp'] = $mdp;
 
-  setcookie('pseudo', $pseudo, time() + 365*24*3600, null, null, false, true);
-  setcookie('mdp', $mdp, time() + 365*24*3600, null, null, false, true);
+  if (isset($_POST['cookie'])) {
+    setcookie('pseudo', $pseudo, time() + 365*24*3600, null, null, false, true);
+    setcookie('mdp', $mdp, time() + 365*24*3600, null, null, false, true);
+  }
 
   header("Location: espacemembre.php");
   exit;
@@ -54,11 +62,13 @@ else {
               echo "<p>Il est l'heure de vous connecter pour la première fois</p>";
             }
             if ($_GET['code'] == 2) {
-              echo "Vous êtes déconnecté";
+              echo "<p>Vous êtes déconnecté</p>";
             }
-
+            if ($_GET['code'] == 3) {
+              echo "<p>Votre session a expiré</p>";
+            }
             else {
-              echo "Connectez-vous";
+              echo "<p>Connectez-vous</p>";
             }
           }
        ?>
@@ -76,8 +86,14 @@ else {
                       <input type="password" name="mdp">
                     </p>
                   </label>
+                  <label>Connexion automatique
+                     <input type="checkbox" name="cookie">
+                 </label>
 
-                <input type="submit" value="Me connecter">
+                <p>
+                  <input type="submit" value="Me connecter">
+                </p>
+
               </form>
 
     </body>

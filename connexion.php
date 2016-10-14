@@ -1,11 +1,14 @@
 <?php
   session_start();
 
+// If your session is not over you are redirected to the member page
   if (isset($_SESSION['pseudo']) && isset($_SESSION['mdp'])) {
     header("Location: espacemembre.php");
     exit;
   }
 
+// Code 3 means you came to connexion page because your session was over
+//If it is not so and you have cookies then you are redirected to member page
   if (isset($_COOKIE['pseudo']) && isset($_COOKIE['mdp']) && $_GET['code'] != 3) {
     header("Location: espacemembre.php?code=2");
     exit;
@@ -14,11 +17,14 @@
 // Connexion to the database
   require ('db.php');
 
+// If the user try to connect with the form
   if (isset($_POST['pseudo']) && isset($_POST['mdp'])) {
 
+// Treat the variables
   $pseudo = htmlspecialchars($_POST['pseudo']);
   $mdp = sha1(htmlspecialchars($_POST['mdp']));
 
+// Check in the database if the user and password are correct
   $request = $bdd->prepare('SELECT * FROM membres WHERE pseudo= :pseudo AND mdp= :mdp');
   $request->execute([
     'pseudo'=>$pseudo,
@@ -27,6 +33,7 @@
 
 $user = $request->fetch();
 
+// If so the session start
 if ($user) {
   $_SESSION['pseudo'] = $pseudo;
   $_SESSION['mdp'] = $mdp;
@@ -56,6 +63,7 @@ else {
 
     <body>
 
+<!-- Different message according to the url code -->
       <?php
           if (!empty($_GET['code'])) {
             if ($_GET['code'] == 1) {

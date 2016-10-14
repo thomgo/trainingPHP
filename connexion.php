@@ -2,6 +2,7 @@
 
 // Connexion to the database
   require ('db.php');
+
   if (isset($_POST['pseudo']) && isset($_POST['mdp'])) {
 
   $pseudo = htmlspecialchars($_POST['pseudo']);
@@ -19,6 +20,9 @@ if ($user) {
   session_start();
   $_SESSION['pseudo'] = $pseudo;
 
+  setcookie('pseudo', $pseudo, time() + 365*24*3600, null, null, false, true);
+  setcookie('mdp', $mdp, time() + 365*24*3600, null, null, false, true);
+
   header("Location: espacemembre.php");
   exit;
 }
@@ -26,8 +30,11 @@ else {
   echo "Ce compte n'existe pas, vérifiez votre pseudonyme et votre mot de passe";
 }
 
-$request->closeCursor();
 
+}
+
+if ($_GET['code'] == 2) {
+  echo "Vous êtes déconnecté";
 }
  ?>
 

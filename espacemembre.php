@@ -24,7 +24,7 @@ if (!empty($_GET['code'])) {
     <body>
 
       <?php
-        echo "<p>Bonjour " . $_SESSION['pseudo'] . " bienvenue sur votre espace personnel</p>";
+        echo "<p>Bonjour " . $_SESSION['pseudo'] . " bienvenue sur votre espace personnel votre mdp est</p>" . $_SESSION['mdp'];
        ?>
 
        <a href="espacemembre.php?code=1">Me déconnecter</a>

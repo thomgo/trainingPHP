@@ -1,5 +1,10 @@
 <?php
+  session_start();
 
+  if (isset($_SESSION['pseudo']) && isset($_SESSION['mdp'])) {
+    header("Location: espacemembre.php");
+    exit;
+  }
 // Connexion to the database
   require ('db.php');
 
@@ -17,8 +22,8 @@
 $user = $request->fetch();
 
 if ($user) {
-  session_start();
   $_SESSION['pseudo'] = $pseudo;
+  $_SESSION['mdp'] = $mdp;
 
   setcookie('pseudo', $pseudo, time() + 365*24*3600, null, null, false, true);
   setcookie('mdp', $mdp, time() + 365*24*3600, null, null, false, true);
@@ -30,11 +35,6 @@ else {
   echo "Ce compte n'existe pas, vérifiez votre pseudonyme et votre mot de passe";
 }
 
-
-}
-
-if ($_GET['code'] == 2) {
-  echo "Vous êtes déconnecté";
 }
  ?>
 
@@ -53,6 +53,10 @@ if ($_GET['code'] == 2) {
             if ($_GET['code'] == 1) {
               echo "<p>Il est l'heure de vous connecter pour la première fois</p>";
             }
+            if ($_GET['code'] == 2) {
+              echo "Vous êtes déconnecté";
+            }
+
             else {
               echo "Connectez-vous";
             }

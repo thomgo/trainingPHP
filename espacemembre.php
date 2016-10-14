@@ -1,6 +1,23 @@
 <?php
   session_start();
 
+  if (isset($_GET['code'])) {
+    if ($_GET['code']== 2) {
+      $_SESSION['pseudo'] = $_COOKIE['pseudo'];
+      $_SESSION['mdp'] = $_COOKIE['mdp'];
+    }
+  }
+
+  if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 60)) {
+   session_unset();
+   session_destroy();
+}
+$_SESSION['LAST_ACTIVITY'] = time();
+
+if (empty($_SESSION['pseudo']) && empty($_SESSION['mdp'])) {
+  header("Location: connexion.php?code=3");
+}
+
 if (!empty($_GET['code'])) {
   if ($_GET['code'] == 1) {
     session_destroy();
@@ -24,7 +41,7 @@ if (!empty($_GET['code'])) {
     <body>
 
       <?php
-        echo "<p>Bonjour " . $_SESSION['pseudo'] . " bienvenue sur votre espace personnel votre mdp est</p>" . $_SESSION['mdp'];
+        echo "<p>Bonjour " . $_SESSION['pseudo'] . " bienvenue sur votre espace personnel.</p>";
        ?>
 
        <a href="espacemembre.php?code=1">Me déconnecter</a>

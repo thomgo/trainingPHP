@@ -31,12 +31,27 @@ if (!empty($_GET['code'])) {
       <label>Votre Message : <input type="text" name="message"/></label>
     </p>
     <p>
-      <label>Votre code (vous permettra de supprimer votre message) : <input type="number" name="code"/></label>
+      <label>Votre code (vous permettra de supprimer votre message) : <input type="password" name="code"/></label>
     </p>
 
     <p><input type="submit" value="Envoyer"></p>
 
     </form>
+
+      <form action="minichat_treatment.php" method="POST">
+        <p>Si vous souhaitez supprimer votre message</p>
+        <label>Votre code : <input type="password" name="supcode"/></label>
+        <input type="submit" value="Supprimer">
+      </form>
+
+      <form action="minichat_treatment.php" method="POST">
+        <p>Si vous souhaitez modifier votre message</p>
+        <p>
+          <label>Votre nouveau message : <input type="text" name="newmessage"/></label>
+        </p>
+        <label>Votre code : <input type="password" name="modifcode"/></label>
+        <input type="submit" value="Modifier">
+      </form>
 
 <?php
 
@@ -51,13 +66,7 @@ while ($chatdata = $selection->fetch()) {
 
   if (!empty($chatdata['pseudo'] && $chatdata['message'] )) {
 
-echo '<p>'. $chatdata['pseudo']. ' - '  . $chatdata['message'] . '</p>' .
-'<p>
-  <form action="minichat_treatment.php" method="POST">
-    <label>Votre code : <input type="number" name="supcode"/></label>
-    <input type="submit" value="Supprimer">
-  </form>
-</p>';
+echo '<p>'. $chatdata['pseudo']. ' - '  . $chatdata['message'] . '</p>';
 }
 
 }
@@ -65,5 +74,14 @@ echo '<p>'. $chatdata['pseudo']. ' - '  . $chatdata['message'] . '</p>' .
 $selection->closeCursor();
 
  ?>
+
+<!-- Delete all the messages -->
+ <form action="minichat_treatment.php" method="POST">
+
+   <p>
+     <input type="submit" name="delete" value="Supprimer les messages">
+   </p>
+
+ </form>
 
 </html>

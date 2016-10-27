@@ -24,7 +24,12 @@
               ?>
               <div class="major">
                 <h2><?php echo "<p>" . $currentlist['nom'] . "</p>"; ?></h2>
-
+                <?php
+                $requesttask = $bdd->query('SELECT * FROM taches WHERE listid ="'.$currentlist['id'].'"');
+                  while ($tasklist = $requesttask->fetch()) {
+                  echo "<p>" . $tasklist['nom'] . " <a href='#' class='afaire'> A faire </a> <a href='#' class='fait hide'> Fait </a></p>";
+                  }
+                 ?>
                 <form action="traitement.php" method="post">
                   <input type="text" name="taches" required>
                   <input type="hidden" name="listid" value='<?php echo $currentlist['id'];?>'>

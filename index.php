@@ -37,6 +37,13 @@
                     <input type="submit" value="Ajouter une tache">
                   </p>
                 </form>
+
+                <form action="traitement.php" method="post">
+                  <input type="hidden" name="listid" value='<?php echo $currentlist['id'];?>'>
+                  <p>
+                    <input type="submit" name="suppression" value="Supprimer la liste">
+                  </p>
+                </form>
               </div>
 
           <?php
@@ -46,7 +53,7 @@
          <form action="traitement.php" method="post">
            <input type="text" name="list" required>
            <p>
-             <input type="submit" value="Ajouter la liste">
+             <input type="submit" value="Ajouter une liste">
            </p>
          </form>
 

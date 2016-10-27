@@ -17,6 +17,16 @@ if (!empty($_POST['taches'])) {
   $requete->execute(array($taches, $listid));
 }
 
+if (isset($_POST['listid']) && !isset($_POST['taches'])) {
+  $listid = (int)$_POST['listid'];
+
+  $requete = $bdd->prepare("DELETE FROM list WHERE id= ?");
+  $requete->execute(array($listid));
+
+  $requete = $bdd->prepare("DELETE FROM taches WHERE listid= ?");
+  $requete->execute(array($listid));
+}
+
 
 header('Location: index.php');
  ?>

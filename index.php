@@ -17,8 +17,33 @@
     <body>
         <?php
         // Connexion to the database
-                  require ('db.php');
+            require ('db.php');
+            $request = $bdd->query("SELECT * FROM list");
+
+            while ($currentlist = $request->fetch()) {
+              ?>
+              <div class="major">
+                <h2><?php echo "<p>" . $currentlist['nom'] . "</p>"; ?></h2>
+
+                <form action="traitement.php" method="post">
+                  <input type="text" name="taches" required>
+                  <input type="hidden" name="listid" value='<?php echo $currentlist['id'];?>'>
+                  <p>
+                    <input type="submit" value="Ajouter une tache">
+                  </p>
+                </form>
+              </div>
+
+          <?php
+            }
          ?>
+
+         <form action="traitement.php" method="post">
+           <input type="text" name="list" required>
+           <p>
+             <input type="submit" value="Ajouter la liste">
+           </p>
+         </form>
 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>

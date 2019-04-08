@@ -1,0 +1,58 @@
+h1, h3
+
+{
+
+    text-align:center;
+
+}
+
+h3
+
+{
+
+    background-color:black;
+
+    color:white;
+
+    font-size:0.9em;
+
+    margin-bottom:0px;
+
+}
+
+.news p
+
+{
+
+    background-color:#CCCCCC;
+
+    margin-top:0px;
+    padding: 0.5em;
+
+}
+
+.news
+
+{
+
+    width:70%;
+
+    margin:auto;
+
+}
+
+.news .date {
+  background-color: lightblue;
+  font-style: italic;
+  color: white;
+}
+
+a
+
+{
+
+    text-decoration: none;
+
+    color: blue;
+
+}
